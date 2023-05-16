@@ -1,0 +1,1 @@
+A Mock Landing Page for a website
