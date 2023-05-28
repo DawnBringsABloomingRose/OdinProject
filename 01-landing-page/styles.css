@@ -1,9 +1,20 @@
+* {
+    font-family: sans-serif;
+    margin: 0px;
+    padding: 0px;
+}
+
+
+
+body {
+    width: 100%;
+}
 
 .whole-page {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     min-height: 1200px;
+    width: 100%;
 }
 
 .header {
@@ -12,23 +23,34 @@
     align-items: center;
     flex: 5 1 auto;
     justify-content: space-between;
-    width: 100%;
+    min-width: 100%;
+    background-color: #1F2937;
 }
 
 .header1 {
     display: flex;
     justify-content: space-between;
-    width: 66%;
-    height: 20px;
+    align-items: center;
+    width: 70%;
+    min-height: 50px;
 }
 
 .logo, .links {
     flex: 1 1 auto;
 }
 
+.logo {
+    font-size: 24px;
+    color: #F9FAF8;
+    font-weight: bold;
+}
+
 
 .links a {
-    margin: 2px;
+    margin: 20px;
+    font-size: 18px;
+    color: #E5E7EB;
+    text-decoration: none;
 }
 
 .links {
@@ -39,9 +61,10 @@
 .splash {
     display: flex;
     justify-content: space-evenly;
-    align-items: flex-start;
-    width: 66%;
+    align-items: center;
+    width: 70%;
     margin-bottom: 50px;
+    min-height: 400px;
 }
 
 .sell {
@@ -51,27 +74,62 @@
     align-items: flex-start;
 }
 
+h2 {
+   font-weight: 800;
+   font-size: 48px;
+   color: #F9FAF8;
+
+}
+
 .sell * {
     margin: 3px 10px;
+}
+
+.sell p {
+    font-size: 18px;
+    color: #E5E7EB;
+}
+
+button {
+    background-color: #3882F6;
+    color: #E5E7EB;
+    border-radius: 8px;
+    padding: 5px 20px;
+    font-weight: 600;
+}
+
+.header button {
+    border-width: 0px;
+    margin: 10px;
 }
 
 .information {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-evenly;
     width: 100%;
     flex: 4 1 auto;
+    min-height: 400px;
+}
+
+h3 {
+    font-size: 36px;
+    font-weight: 800;
+    color: #1F2937;
 }
 
 .illustrations {
     display: flex;
-    width: 50%;
+    width: 60%;
+    justify-content: space-between;
 }
 
 .empty-box {
     height: 150px;
     width: 150px;
-    border: 3px solid blue;
+    border: 3px solid #3882F6;
+    border-radius: 8px;
 }
 
 .illustration {
@@ -83,6 +141,10 @@
 
 .illustration p {
     text-align: center;
+    margin-top: 8px;
+    font-size: small;
+    max-width: 150px;
+    color: #1F2937;
 }
 
 .testimonials {
@@ -91,6 +153,13 @@
     align-items: center;
     width: 100%;
     flex: 4 1 auto;
+    background-color: #E5E7EB;
+    justify-content: center;
+    min-height: 400px;
+}
+
+.testimonials p {
+    margin: 4px;
 }
 
 .quote-holder {
@@ -102,6 +171,16 @@
 
 .quote-tag {
     align-self: flex-end;
+    font-size: 26px;
+    color: #1F2937;
+    font-weight: 600;
+}
+
+.quote {
+    font-size: 32px;
+    color: #1F2937;
+    font-style: oblique;
+    font-weight: 100;
 }
 
 .sign-up {
@@ -110,21 +189,38 @@
     align-items: center;
     justify-content: center;
     flex: 3 1 auto;
+    min-height: 300px;
 }
 .sign-up-holder {
-    width: 50%;
+    width: 60%;
     height: 120px;
     display: flex;
     align-items: center;
     justify-content: space-around;
     background-color: #3882F6;
+    border-radius: 8px;
+}
+
+.sign-up-holder button {
+    border-color: #E5E7EB;
+    border-style: solid;
 }
 
 .sign-up-holder h4, .sign-up-holder p { 
     margin: 2px;
+    color: #E5E7EB;
 }
 
 .footer {
     text-align: center;
     flex: 1 1 auto;
+    background-color: #1F2937;
+    color: #E5E7EB;
+    font-size: smaller;
+    min-height: 50px;
+}
+
+.footer p {
+    padding: 4px;
+    margin: 15px;
 }
