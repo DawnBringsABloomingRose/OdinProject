@@ -46,43 +46,41 @@ function playRPS(playerSelection, computerSelection){
 
 }
 
+function selectRPS(playerBtn) {
+    const playerSelection = playerBtn.target.id;
+    const gameState = playRPS(playerSelection, getComputerChoice());
 
-//a function to play through 5 rounds of RPS
-function game() {
-    console.log("Welcome to Rock paper scissors xd");
-    let playerSelection= "";
-    let computerSelection = "";
-    let playerWins = 0;
-    let computerWins = 0;
-    let currentWinner;
-    for (let i = 0; i < 5; i++) {
-        console.log(`Game ${i+1}`)
-        playerSelection = prompt("Please enter rock, paper or scissors").toLowerCase();
-        computerSelection = getComputerChoice();
-        currentWinner = playRPS(playerSelection, computerSelection);
-        if (currentWinner == 1) {
-            console.log(`You win! ${playerSelection} beats ${computerSelection}`);
-            playerWins++;
-        }
-        else if (currentWinner == 2) {
-            console.log(`You lose! ${computerSelection} beats ${playerSelection}`);
-            computerWins++;
-        }
-        else if (currentWinner == 3) {
-            console.log(`It was a draw! You both chose ${playerSelection}`);
-        }
-
+    if (gameState == 1) {
+        playerWins++;
+        results.textContent = `You win! Currently it is ${playerWins} you to ${computerWins} the computer`
+    } 
+    else if (gameState==2) {
+        computerWins++;
+        results.textContent = `You lose! Currently it is ${playerWins} you to ${computerWins} the computer`
+    }
+    else if (gameState == 3) {
+        results.textContent = `Tie Game! Currently it is ${playerWins} you to ${computerWins} the computer`
     }
 
-    if (computerWins > playerWins) {
-        console.log(`The computer won ${computerWins} to your ${playerWins}. Better Luck next time!`);
+    if(playerWins >= 5) {
+        results.textContent += `! You won the best of 5! Good job. The next round will reset the scores`;
+        playerWins = 0;
+        computerWins = 0;
     }
-    else if (playerWins > computerWins) {
-        console.log(`The computer won ${computerWins} to your ${playerWins}. Good job!`);
-    }
-    else {
-        console.log(`The computer won ${computerWins} to your ${playerWins}. It was a draw!`);
+    if(computerWins >= 5) {
+        results.textContent += `! You lost the best of 5! Better luck next time. The next round will reset the scores`;
+        playerWins = 0;
+        computerWins = 0;
     }
 }
 
-game();
+const results = document.querySelector('#results');
+const rockBtn = document.querySelector('#rock');
+const paperBtn = document.querySelector('#paper');
+const scissorsBtn = document.querySelector('#scissors');
+let playerWins = 0;
+let computerWins = 0;
+
+rockBtn.addEventListener('click',selectRPS);
+paperBtn.addEventListener('click',selectRPS);
+scissorsBtn.addEventListener('click',selectRPS);
