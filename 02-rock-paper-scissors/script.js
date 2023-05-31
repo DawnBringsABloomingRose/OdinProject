@@ -18,32 +18,71 @@ function getComputerChoice() {
 
 
 //a function to play a single round of Rock, paper, scissors
+//arguments: playerSelection is a string, computerSelection is a string
+//return: 1 for player win, 2 for CPU win, 3 for a tie
 function playRPS(playerSelection, computerSelection){
     if (playerSelection == computerSelection) {
-        return `It was a tie! You both chose ${playerSelection}`
+        return 3;
     }
     else if (playerSelection == "rock" && computerSelection == "paper") {
-        return "You lose! Paper beats rock";
+        return 2;
     }
     else if (playerSelection == "rock" && computerSelection == "scissors") {
-        return "You win! Rock beats paper";
+        return 1;
     }
     else if (playerSelection == "scissors" && computerSelection == "paper") {
-        return "You win! Scissors beats paper";
+        return 1;
     }
     else if (playerSelection == "scissors" && computerSelection == "rock") {
-        return "You lose! Rock beats scissors";
+        return 2;
     }
     else if (playerSelection == "paper" && computerSelection == "scissors") {
-        return "You lose! Scissors beats paper";
+        return 2;
     }
     else if (playerSelection == "paper" && computerSelection == "rock") {
-        return "You win! Paper beats rock";
+        return 1;
     }
     return "error";
 
 }
 
-let playerSelection = prompt("Please enter rock, paper or scissors").toLowerCase();
 
-console.log(playRPS(playerSelection, getComputerChoice()));
+//a function to play through 5 rounds of RPS
+function game() {
+    console.log("Welcome to Rock paper scissors xd");
+    let playerSelection= "";
+    let computerSelection = "";
+    let playerWins = 0;
+    let computerWins = 0;
+    let currentWinner;
+    for (let i = 0; i < 5; i++) {
+        console.log(`Game ${i+1}`)
+        playerSelection = prompt("Please enter rock, paper or scissors").toLowerCase();
+        computerSelection = getComputerChoice();
+        currentWinner = playRPS(playerSelection, computerSelection);
+        if (currentWinner == 1) {
+            console.log(`You win! ${playerSelection} beats ${computerSelection}`);
+            playerWins++;
+        }
+        else if (currentWinner == 2) {
+            console.log(`You lose! ${computerSelection} beats ${playerSelection}`);
+            computerWins++;
+        }
+        else if (currentWinner == 3) {
+            console.log(`It was a draw! You both chose ${playerSelection}`);
+        }
+
+    }
+
+    if (computerWins > playerWins) {
+        console.log(`The computer won ${computerWins} to your ${playerWins}. Better Luck next time!`);
+    }
+    else if (playerWins > computerWins) {
+        console.log(`The computer won ${computerWins} to your ${playerWins}. Good job!`);
+    }
+    else {
+        console.log(`The computer won ${computerWins} to your ${playerWins}. It was a draw!`);
+    }
+}
+
+game();
