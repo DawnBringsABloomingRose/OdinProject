@@ -1,14 +1,12 @@
 .container {
-    width: 800px;
+    width: 920px;
     display: flex;
     flex-wrap: wrap;
 }
 
 .grid-element {
-    width:6%;
-    border: 1px solid black;
+    outline: 1px solid black;
     position: relative;
-    padding-top: 6%;
 }
 
 .active {
