@@ -1,0 +1,1 @@
+A calculator app that does not respect order of operations, and calculates from left to right instead.
