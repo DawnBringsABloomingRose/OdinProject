@@ -1,0 +1,39 @@
+body {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+div {
+    min-height: 10px;
+    min-width: 10px;    
+}
+.container {
+    display: flex;
+    border:2px solid black;
+    width: 500px;
+    min-height: 500px;
+    flex-direction: column;
+}
+
+.display {
+    height: 50px;
+}
+
+.buttons {
+    display: flex;
+    border:2px solid black;
+    flex-direction: column;
+    min-width: 500px;
+    min-height: 500px;
+}
+
+.row {
+    display: flex;
+}
+
+.button {
+    min-width: 25%;
+    min-height: 50px;
+    outline: 1px solid black;
+}
