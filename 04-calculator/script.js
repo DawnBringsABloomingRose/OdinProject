@@ -41,6 +41,16 @@ function updateDisplay() {
     displayField.textContent = displayText;
 }
 
+function printEquals() {
+    if (number1 != '' && number2 != '') {
+        let tempNum = operate(number1, number2, currentOperand);
+        number1 = tempNum;
+        number2 = '';
+        displayText = number1;
+        updateDisplay();
+    }
+}
+
 function operandClick(item) {
     if(number2=='' && currentlyOperating) {
         currentOperand = item.target.textContent;
@@ -49,7 +59,7 @@ function operandClick(item) {
         return;
     }
     else if (!currentlyOperating && number2 == '') {
-        
+        return;
     }
     else {
         currentlyOperating = true;
@@ -59,7 +69,6 @@ function operandClick(item) {
             number2 = '';
             currentOperand = item.target.textContent;
             displayText = number1 + currentOperand;
-            console.log(displayText);
             updateDisplay();
         }
         else {
@@ -74,14 +83,15 @@ function operandClick(item) {
 
 let displayText = '';
 const displayField = document.querySelector('.display');
+const equalBtn = document.querySelector('.equals');
 const numberBtns = document.querySelectorAll('.number');
 const operandBtns = document.querySelectorAll('.operand');
 
 let number1='';
 let number2='';
-let currentOperand, previousOperand;
+let currentOperand;
 let currentlyOperating = false;
 
+equalBtn.addEventListener('click', printEquals);
 numberBtns.forEach(btn => btn.addEventListener('click',numberClick));
-
 operandBtns.forEach(btn => btn.addEventListener('click',operandClick));
