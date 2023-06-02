@@ -11,6 +11,12 @@ function multiply(num1, num2) {
 }
 
 function divide(num1, num2) {
+    if (num2 == 0) {
+        clearAll();
+        displayText= "you thought you could divide by 0? how cute";
+        updateDisplay();
+        return 'exit';
+    }
     return num1 / num2;
 }
 
@@ -44,6 +50,9 @@ function updateDisplay() {
 function printEquals() {
     if (number1 != '' && number2 != '') {
         let tempNum = operate(number1, number2, currentOperand);
+        if (tempNum == 'exit') {
+            return;
+        }
         number1 = tempNum;
         number2 = '';
         displayText = number1;
@@ -65,6 +74,9 @@ function operandClick(item) {
         currentlyOperating = true;
         if (number1 != '') {
             let tempNum = operate(number1, number2, currentOperand);
+            if (tempNum == 'exit') {
+                return;
+            }
             number1 = tempNum;
             number2 = '';
             currentOperand = item.target.textContent;
