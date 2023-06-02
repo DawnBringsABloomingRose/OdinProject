@@ -81,11 +81,21 @@ function operandClick(item) {
     }
 }
 
+function clearAll() {
+    number1 = '';
+    number2 = '';
+    currentOperand = null;
+    currentlyOperating = false;
+    displayText = '';
+    updateDisplay();
+}
+
 let displayText = '';
 const displayField = document.querySelector('.display');
 const equalBtn = document.querySelector('.equals');
 const numberBtns = document.querySelectorAll('.number');
 const operandBtns = document.querySelectorAll('.operand');
+const clearBtn = document.querySelector('.clear');
 
 let number1='';
 let number2='';
@@ -95,3 +105,4 @@ let currentlyOperating = false;
 equalBtn.addEventListener('click', printEquals);
 numberBtns.forEach(btn => btn.addEventListener('click',numberClick));
 operandBtns.forEach(btn => btn.addEventListener('click',operandClick));
+clearBtn.addEventListener('click', clearAll);
