@@ -47,10 +47,16 @@ class Display
 
   def self.good_guess(correct)
     puts "Good guess! You got #{correct[0]} exactly right and #{correct[1]} with the right colour but wrong spot!\n\n"
+    puts 'your previous guesses were:'
+    print_prev_guesses
     player_breaker
   end
 
   def self.game_over
     puts "Really good guess"
+  end
+
+  def self.print_prev_guesses
+    @game.prev_guesses.each {|n| puts "#{n[0] + n[1] + n[2] + n[3]}"}
   end
 end
