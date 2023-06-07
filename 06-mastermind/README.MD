@@ -1,0 +1,3 @@
+A terminal version of the game mastermind, where you play vs an AI.
+
+Either choose to be the codemaker or the codebreaker. The codemaker makes a 4 peg code, each peg consisting of 1 of 6 colours. The codebreaker makes a guess as to what the code is, and the codebreaker will tell how many pegs were the right colour and right spot and how many were the right colour but wrong spot. The codebreaker has 8-12 guesses.
