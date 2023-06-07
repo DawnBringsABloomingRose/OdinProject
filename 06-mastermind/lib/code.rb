@@ -1,5 +1,6 @@
 class Code 
   COLOURS = 'yrgbpl'.split('')
+  attr_accessor :code
   def initialize(code)
     @code = code if self.class.valid_code(code)
     @guesses = 0
@@ -7,7 +8,7 @@ class Code
 
   def self.valid_code(code)
     return false unless code.length == 4
-    
+
     code.each do |i|
       return false unless COLOURS.include?(i)
     end
@@ -15,6 +16,8 @@ class Code
   end
 
   def correct_guess?(guess)
+    return true if guess == @code
+    false
   end
 
   def take_a_guess(guess)
@@ -24,5 +27,15 @@ class Code
   end
 
   def number_right(guess)
+    exact_right = 0
+    half_right = 0
+    guess.each_with_index do |i, peg|
+      if i == code[peg]
+        exact_right+=1
+        next
+      end
+      half_right += 1 if code.include?(i)
+    end
+    [exact_right, half_right]
   end
 end
