@@ -1,6 +1,7 @@
 class Code 
   COLOURS = 'yrgbpl'.split('')
-  attr_accessor :code
+  attr_reader :code, :guesses
+
   def initialize(code)
     @code = code if self.class.valid_code(code)
     @guesses = 0
@@ -22,7 +23,7 @@ class Code
 
   def take_a_guess(guess)
     @guesses += 1
-    return [4,4] if correct_guess?(guess)
+    return @guesses if correct_guess?(guess)
     return number_right(guess)
   end
 
