@@ -31,12 +31,11 @@ class Code
     exact_right = 0
     half_right = 0
     guess.each_with_index do |i, peg|
-      if i == code[peg]
-        exact_right+=1
-        next
-      end
-      half_right += 1 if code.include?(i)
+      exact_right += 1 if i == code[peg]
     end
-    [exact_right, half_right]
+    guess.uniq.each do |i|
+      half_right += [guess.count(i), code.count(i)].min
+    end
+    [exact_right, half_right - exact_right]
   end
 end
