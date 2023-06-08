@@ -49,6 +49,7 @@ class Display
 
   def self.bot_wins(feedback)
     puts "Good effort! The bot guessed your code #{@game.prev_guesses[-1]} in #{feedback} guesses"
+    play_again
   end
 
   def self.player_breaker
@@ -81,10 +82,17 @@ class Display
   end
 
   def self.game_over
-    puts "Really good guess"
+    puts "Really good guess, you win!"
+    play_again
   end
 
   def self.print_prev_guesses
     @game.prev_guesses.each {|n| puts "#{n[0] + n[1] + n[2] + n[3]}"}
+  end
+
+  def self.play_again
+    puts "Would you like to play again? [Y/N]"
+    answer = gets.chomp.downcase.split('')[0]
+    run_game if answer == 'y'
   end
 end
