@@ -48,7 +48,21 @@ class Ai
   end
 
   def next_guess
+    #for each potential guess
+    #get max
+    #get min of maxes
+    #thats new guess
+    max_scores = Hash.new
     
+    @potential_guesses.each_with_index do |pg, index|
+      scores = Hash.new(0)
+      @candidate_guesses.each do |cg|
+        scores[code_check(pg, cg)] += 1
+      end
+      temp = scores.max_by{|k,v| v}
+      max_scores[pg] = temp[1]
+    end
+    max_scores.min_by{|k,v| v}[0]
   end
 
   def self.all_possible_guesses

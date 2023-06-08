@@ -12,6 +12,8 @@ class Display
       return
     end
     if input == 'm'
+      @game = Game.new(input)
+      player_master
     end
     if input == 'b'
       @game = Game.new(input)
@@ -21,6 +23,10 @@ class Display
   
   def self.print_rules
     puts "Rules are simple"
+  end
+
+  def self.player_master
+    @game.ai_play
   end
 
   def self.player_breaker
