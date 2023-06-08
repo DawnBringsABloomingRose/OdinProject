@@ -5,6 +5,7 @@ class Ai
   def initialize
     @potential_guesses = self.class.all_possible_guesses
     @candidate_guesses = @potential_guesses
+    @guesses = 0
   end
 
   def make_code
@@ -16,6 +17,7 @@ class Ai
   end
 
   def first_guess
+    @guesses += 1
     guess = []
     2.times do
       current_color = COLOURS[rand(6)]
@@ -48,10 +50,10 @@ class Ai
   end
 
   def next_guess
-    #for each potential guess
-    #get max
-    #get min of maxes
-    #thats new guess
+    return first_guess if @guesses == 0
+
+
+    @guesses += 1
     max_scores = Hash.new
     
     @potential_guesses.each_with_index do |pg, index|

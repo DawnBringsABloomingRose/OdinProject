@@ -12,7 +12,15 @@ class Display
       return
     end
     if input == 'm'
-      @game = Game.new(input)
+      puts "Please enter your code, 4 letters"
+      puts "Colours can be Yellow, Red, Green, Blue, Purple or bLack."
+      code = gets.chomp.downcase.split('')
+      until Code.valid_code(code)
+        puts "Invalid guess! It must be 4 letters and can only be the letters YGBPL"
+        puts "Try again"
+        code = gets.chomp.downcase.split('')
+      end
+      @game = Game.new(input, code)
       player_master
     end
     if input == 'b'
@@ -26,7 +34,21 @@ class Display
   end
 
   def self.player_master
-    @game.ai_play
+    system("clear") || system("cls")
+    puts "The AI will now guess your code..."
+    sleep(1.5)
+    feedback = @game.ai_play
+    bot_wins(feedback) if feedback.is_a? Integer
+    if feedback.is_a? Array
+      puts "The bot guessed #{@game.prev_guesses[-1]} which is #{feedback[0]} exactly right and #{feedback[1]} somewhat right!"
+      puts "Press enter to continue"
+      gets.chomp
+      player_master
+    end
+  end
+
+  def self.bot_wins(feedback)
+    puts "Good effort! The bot guessed your code #{@game.prev_guesses[-1]} in #{feedback} guesses"
   end
 
   def self.player_breaker
