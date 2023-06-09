@@ -1,6 +1,7 @@
 require 'csv'
 require 'google/apis/civicinfo_v2'
 require 'erb'
+require 'time'
 
 
 
@@ -39,13 +40,27 @@ def save_thank_you_letter(id, form_letter)
   end
 end
 
+def most_popular_times(times)
+  time_freq = Hash.new(0)
+  times.sum {|t| time_freq[t.hour]+=1}
+  time_freq.max_by {|k,v| v}
+end
+
+def most_popular_day (dates)
+  days_of_the_week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  date_freq = Hash.new(0)
+  dates.sum {|d| date_freq[d.wday]+=1}
+  days_of_the_week[date_freq.max_by {|k, v| v}[0]]
+end
+
 template_letter = File.read('form_letter.erb')
 erb_template = ERB.new template_letter
 
 puts 'Event manager Initialized!'
 
 contents = CSV.open('event_attendees.csv', headers: true, header_converters: :symbol) if File.exist? "event_attendees.csv"
-
+reg_times = []
+reg_dates = []
 contents.each_with_index do |row|
   id = row[0]
 
@@ -53,8 +68,16 @@ contents.each_with_index do |row|
   zipcode = clean_zipcode(row[:zipcode])
   legislators = legislators_by_zipcode(zipcode)
 
+  
+  reg_date = row[:regdate]
+  reg_times.push(Time.parse(reg_date.split[1]))
+  reg_date = reg_date.split[0]
+  reg_date = Date.strptime(reg_date, "%m/%d/%y")
+  reg_dates.push(reg_date)
+
+
   form_letter = erb_template.result(binding)
-  #save_thank_you_letter(id, form_letter)
+  save_thank_you_letter(id, form_letter)
   
   #puts "#{name} #{zipcode} #{legislator_string}"
 end
