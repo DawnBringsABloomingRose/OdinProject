@@ -21,12 +21,22 @@ class Game_Manager
 
   def load_game
     @game = Game.new
-    @game.unserialize(@saved_game)
+    puts "what game would you like to open?" 
+    name = gets.chomp.downcase
+    name = "saved_games/#{name}.txt"
+    file_contents = File.open(name, "r") {|file| file.read}
+    @game.unserialize(file_contents)
     run_game
   end
 
   def save_game
-    @saved_game = @game.serialize
+    puts "what would you like to call your saved game?" 
+    name = gets.chomp.downcase
+    name = "saved_games/#{name}.txt"
+    Dir.mkdir('saved_games') unless Dir.exist?('saved_games')
+    File.open(name, "w") do |file|
+      file.puts @game.serialize
+    end
   end
 
   def run_game
