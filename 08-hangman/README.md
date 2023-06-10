@@ -1,0 +1,1 @@
+A console based hangman game that gets a random 5 to 12 letter word from the most common english words searched on Google
