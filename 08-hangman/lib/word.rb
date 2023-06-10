@@ -1,4 +1,8 @@
+require_relative 'serialize_mixin'
+
 class Word
+include BasicSerializable
+
   attr_reader :guess, :word
 
   def initialize

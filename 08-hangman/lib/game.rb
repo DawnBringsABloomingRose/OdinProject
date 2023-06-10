@@ -1,4 +1,9 @@
+require_relative 'serialize_mixin'
+
 class Game
+include BasicSerializable
+
+
   attr_reader :game_over
 
   def initialize
@@ -7,6 +12,28 @@ class Game
     @current_guesses = 0
     @previous_guesses = []
     @game_over = false
+  end
+
+  def serialize
+    obj = {}
+    word = {}
+    instance_variables.map do |var|
+      obj[var] = instance_variable_get(var) unless var.is_a?(Word)
+      obj[var] = @word.serialize if instance_variable_get(var).is_a?(Word)
+    end
+    @@serializer.dump obj
+  end
+
+  def unserialize(string)
+    obj = @@serializer.parse string
+    word = Word.new
+    obj.keys.each do |key|
+      instance_variable_set(key, obj[key]) unless key == "@word"
+      if key == "@word"
+        word.unserialize(obj[key])
+        @word = word
+      end
+    end
   end
 
   def guess(char)
