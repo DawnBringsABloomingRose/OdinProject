@@ -18,5 +18,23 @@ class Word
     @word.split('').each_with_index do |wordchar, i|
       guess[i] = char if wordchar == char
     end
+
+    return "You guessed it! The word was #{word}" if won?
+    return "#{char} was in there but does not quite solve it!\n\n" if word_includes?(char)
+    return "#{char} was not quite in there!\n\n"
+  end
+
+  def neat_print_guess
+    neat_print = ''
+    @guess.each {|i| neat_print += i + ' '}
+    neat_print
+  end
+
+  def won? 
+    !@guess.include?('_')
+  end
+
+  def word_includes? (char)
+    @guess.include?(char)
   end
 end

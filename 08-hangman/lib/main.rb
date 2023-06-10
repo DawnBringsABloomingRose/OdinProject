@@ -1,3 +1,8 @@
 require_relative 'word'
+require_relative 'game'
+require_relative 'game_manager'
 
-10.times {p Word.get_random_word }
+
+game_manager = Game_Manager.new
+
+game_manager.play
