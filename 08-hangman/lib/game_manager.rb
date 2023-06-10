@@ -18,7 +18,7 @@ class Game_Manager
   end
 
   def run_game
-    until @game_over
+    until @game.game_over
       @game.current_status
       puts 'Take a guess, or type "menu" to return to the main menu or "exit" to exit'
       response = gets.chomp.downcase
@@ -28,7 +28,11 @@ class Game_Manager
 
       puts @game.guess(response)
       puts ''
-      @game_over = @game.game_over
     end
+
+    puts "Play again? Y/N"
+
+    response = gets.chomp.downcase[0]
+    play if response == 'y'
   end
 end

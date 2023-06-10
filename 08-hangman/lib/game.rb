@@ -19,6 +19,8 @@ class Game
 
     @game_over = true if @word.won? || @current_guesses >= @max_guesses
 
+    return "You won! The word was #{@word.word}" if @word.won?
+    return "You lose! Sorry!" if @current_guesses >= @max_guesses
     return "#{char} was in the word!" if @word.word_includes?(char)
     "#{char} was not in the word"
   end
