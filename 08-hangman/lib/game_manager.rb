@@ -22,11 +22,22 @@ class Game_Manager
   def load_game
     @game = Game.new
     puts "what game would you like to open?" 
+    print_saved_games
     name = gets.chomp.downcase
     name = "saved_games/#{name}.txt"
-    file_contents = File.open(name, "r") {|file| file.read}
+    file_contents = File.open(name, "r") {|file| file.read} if File.exists?(name)
+    return unless file_contents
     @game.unserialize(file_contents)
     run_game
+  end
+
+  def print_saved_games
+    saved_games = Dir.entries("saved_games")
+    nice_text = ''
+    saved_games.each do |game_name|
+      next if game_name == '.' || game_name == '..'
+      puts game_name.chomp('.txt')
+    end
   end
 
   def save_game
