@@ -28,4 +28,8 @@ class Board
     return true if !(@pieces[col][row].nil?) && @pieces[col][row] == @pieces[col - 1][row + 1] && @pieces[col][row] == @pieces[col - 2][row + 2] && @pieces[col][row] == @pieces[col - 3][row + 3]
     false
   end
+
+  def add_piece(col, color) 
+    @pieces[col].push(color)
+  end
 end
