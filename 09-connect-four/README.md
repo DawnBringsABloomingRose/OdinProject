@@ -1,0 +1,1 @@
+A command line connect four, tested with TDD and Rspec
