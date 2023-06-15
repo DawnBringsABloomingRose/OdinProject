@@ -1,7 +1,7 @@
 class Board
   attr_accessor :pieces
   def initialize
-    @pieces = Array.new(7, Array.new())
+    @pieces = Array.new(7) {Array.new}
   end
 
   def check_win
@@ -32,5 +32,17 @@ class Board
   def add_piece(col, color) 
     return "too large" if @pieces[col].length >= 6
     @pieces[col].push(color)
+  end
+
+  def print_board
+    puts " 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 "
+    6.times do |i|
+      str = ""
+      @pieces.each do |piece|
+        str += "   |" if piece[5 - i].nil?
+        str += " #{piece[5 - i]} |" unless piece[5 - i].nil?
+      end
+      puts str
+    end
   end
 end
