@@ -19,13 +19,14 @@ class Board
   end
 
   def check_hor(col, row)
+    return false if col+3 > 6 
     return true if !(@pieces[col][row].nil?) && @pieces[col][row] == @pieces[col + 1][row] && @pieces[col][row] == @pieces[col + 2][row] && @pieces[col][row] == @pieces[col + 3][row]
     false
   end
 
   def check_diagonal(col, row)
-    return true if !(@pieces[col][row].nil?) && @pieces[col][row] == @pieces[col + 1][row + 1] && @pieces[col][row] == @pieces[col + 2][row + 2] && @pieces[col][row] == @pieces[col + 3][row + 3]
-    return true if !(@pieces[col][row].nil?) && @pieces[col][row] == @pieces[col - 1][row + 1] && @pieces[col][row] == @pieces[col - 2][row + 2] && @pieces[col][row] == @pieces[col - 3][row + 3]
+    return true if !(@pieces[col][row].nil?) && col+3 <= 6 && @pieces[col][row] == @pieces[col + 1][row + 1] && @pieces[col][row] == @pieces[col + 2][row + 2] && @pieces[col][row] == @pieces[col + 3][row + 3]
+    return true if !(@pieces[col][row].nil?) && col-3 >= 0 &&  @pieces[col][row] == @pieces[col - 1][row + 1] && @pieces[col][row] == @pieces[col - 2][row + 2] && @pieces[col][row] == @pieces[col - 3][row + 3]
     false
   end
 
@@ -35,7 +36,7 @@ class Board
   end
 
   def print_board
-    puts " 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 "
+    puts " 0 | 1 | 2 | 3 | 4 | 5 | 6 "
     6.times do |i|
       str = ""
       @pieces.each do |piece|
