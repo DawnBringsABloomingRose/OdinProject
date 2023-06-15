@@ -30,6 +30,7 @@ class Board
   end
 
   def add_piece(col, color) 
+    return "too large" if @pieces[col].length >= 6
     @pieces[col].push(color)
   end
 end

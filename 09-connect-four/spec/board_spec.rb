@@ -50,5 +50,11 @@ describe Board do
       4.times {|i| board.add_piece(i, 'b')}
       expect(board.check_win).to eql('b')
     end
+
+    it "does not allow adding too many pieces to a column" do
+      board = Board.new
+      6.times { board.add_piece(0, 'b')}
+      expect(board.add_piece(0, 'b')).to eql('too large')
+    end
   end
 end
