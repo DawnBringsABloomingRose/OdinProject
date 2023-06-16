@@ -52,5 +52,14 @@ describe Piece do
       expect(king.valid_move?([2,3])).to eql(false)
     end
 
+    it "returns true if a knight makes a valid move" do
+      knight = Knight.new('black', [1,1])
+      expect(knight.valid_move?([3,2])).to eql(true)
+    end
+
+    it "returns false if a knight makes an invalid move" do
+      knight = Knight.new('black', [1,1])
+      expect(knight.valid_move?([2,2])).to eql(false)
+    end
   end
 end

@@ -19,9 +19,15 @@ class Piece
 end
 
 class Knight < Piece
+  MOVES = [[1,2], [2,1], [1,-2], [2,-1], [-1,2], [-2,1], [-1, -2], [-2,-1]]
+
   def get_symbol
     return "♘" if @colour == 'black'
     "♞"
+  end
+
+  def possible_direction?(direction)
+    MOVES.include?(direction)
   end
 end
 
