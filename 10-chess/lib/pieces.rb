@@ -1,7 +1,7 @@
 require_relative "modules"
 
 class Piece
-  attr_reader :symbol
+  attr_reader :symbol, :current_location
   MOVES = []
   def initialize(colour, current_location)
     @current_location = current_location
@@ -10,12 +10,16 @@ class Piece
     @symbol = self.get_symbol
   end
 
-  def valid_move?(move)
+  def valid_move?(move, ally_locations = [], enemy_locations = [])
     return false if move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7 
-    difference = [move[0] - @current_location[0], move[1] - @current_location[1]]
 
-    self.possible_direction?(difference)
+    difference = [move[0] - @current_location[0], move[1] - @current_location[1]]
+    
+    #add check to make sure move wont put into check
+    return self.possible_direction?(difference) && self.clear_to_move?(move, ally_locations, enemy_locations)
   end
+
+  
 end
 
 class Knight < Piece
@@ -28,6 +32,15 @@ class Knight < Piece
 
   def possible_direction?(direction)
     MOVES.include?(direction)
+  end
+
+  def clear_to_move?(move, ally_locations, enemy_locations)
+    clear = true
+    ally_locations.each do |ally|
+      return false if ally.is_a?(Array) && ally == move
+      return false if ally.is_a?(Piece) && ally.current_location == move
+    end
+    clear
   end
 end
 
@@ -43,6 +56,15 @@ class King < Piece
     return false unless direction[0] == 0 || direction[0] == 1
     return false unless direction[1] == 0 || direction[1] == 1
     true
+  end
+
+  def clear_to_move?(move, ally_locations, enemy_locations)
+    clear = true
+    ally_locations.each do |ally|
+      return false if ally.is_a?(Array) && ally == move
+      return false if ally.is_a?(Piece) && ally.current_location == move
+    end
+    clear
   end
 end
 
@@ -60,6 +82,8 @@ class Queen < Piece
     direction = normalize_direction(direction)
     MOVES.include?(direction)
   end
+
+  
 end
 
 class Bishop < Piece
