@@ -31,6 +31,13 @@ class King < Piece
     return "♔" if @colour == 'black'
     "♚"
   end
+
+  def possible_direction?(direction)
+    return false if direction[0] == 0 && direction[1] == 0
+    return false unless direction[0] == 0 || direction[0] == 1
+    return false unless direction[1] == 0 || direction[1] == 1
+    true
+  end
 end
 
 class Queen < Piece
@@ -81,7 +88,7 @@ class Rook < Piece
     return "♖" if @colour == 'black'
     "♜"
   end
-  
+
   def possible_direction?(direction)
     direction = normalize_direction(direction)
     MOVES.include?(direction)

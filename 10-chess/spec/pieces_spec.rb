@@ -41,5 +41,16 @@ describe Piece do
       rook = Rook.new('black', [1,1])
       expect(rook.valid_move?([3,3])).to eql(false)
     end
+
+    it "returns true for a valid move for a king" do
+      king = King.new('black', [1,1])
+      expect(king.valid_move?([2,1])).to eql(true)
+    end
+
+    it "returns false if a king tries to move more than 1 square" do
+      king = King.new('black', [1,1])
+      expect(king.valid_move?([2,3])).to eql(false)
+    end
+
   end
 end
