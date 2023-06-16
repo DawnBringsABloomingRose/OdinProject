@@ -1,6 +1,7 @@
+#used for pieces that can move linearly without range constraints, ie the queen, rook and bishop
 module LinearMovement
   
-  #it takes in a vector, normalizes it, then returns [1,1] if the vector has a 45 degree angle
+  #it takes in a vector, normalizes it, then returns the normalized vector rounded up if the vector has a 45 degree angle (ie [0.71, -0.71] becomes [1,-1])
   #returns the normalized vector otherwise
   def normalize_direction(direction)
     magnitude = Math.sqrt(direction[0]**2 + direction[1]**2)
@@ -24,7 +25,7 @@ module LinearMovement
       x += direction[0]
       y += direction[1]
     end
-    
+
     ally_locations.each do |ally|
       clear = !submoves.include?(ally) if ally.is_a? Array
       clear = !submoves.include?(ally.current_location) if ally.is_a? Piece
