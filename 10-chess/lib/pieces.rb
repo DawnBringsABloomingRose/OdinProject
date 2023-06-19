@@ -22,6 +22,11 @@ class Piece
     #clear_to_move checks if there are other pieces in the way that would hinder the move
     return self.possible_direction?(difference) && self.clear_to_move?(move, ally_locations, enemy_locations)
   end
+
+  def make_move(move, allies, enemies)
+    @current_location = move if valid_move?(move, allies, enemies)
+    
+  end
 end
 
 class Knight < Piece
@@ -174,6 +179,7 @@ class Pawn < Piece
     allowed_direction = 1 if @colour == 'black'
     allowed_direction = -1 if @colour == 'white'
 
+    p difference
     if difference[0] == 0
       if difference[1] == 2 * allowed_direction
         ally_locations.each do |ally|
@@ -215,6 +221,12 @@ class Pawn < Piece
       end
       return false
     end
+  end
+
+  def make_move(move, ally, enemy)
+    super
+    @first_move = false
+    @en_passable = true
   end
 end
 

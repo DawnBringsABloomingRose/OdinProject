@@ -109,6 +109,22 @@ class Board
     return true
   end
 
+  def make_move(from, to, to_play)
+    current_player = @black_pieces if to_play == 'black'
+    current_player = @white_pieces if to_play == 'white'
+    enemy_player = @black_pieces if to_play == 'white'
+    enemy_player = @white_pieces if to_play == 'black'
+    
+    piece = current_player.find {|i| i.current_location == from}
+    return 'none' unless piece
+    return 'check' if is_check?(to_play, piece, to)
+    return 'invalid' unless piece.valid_move?(to, current_player, enemy_player)
+    piece.make_move(to, current_player, enemy_player)
+    
+    return 'good'
+
+  end
+
   def test_case_1
     @black_pieces[0].current_location = [4,5]
   end
@@ -136,3 +152,7 @@ end
 board = Board.new
 
 
+board.print_board
+
+p board.make_move([0,6], [0, 4], 'white')
+board.print_board

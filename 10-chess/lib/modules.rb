@@ -1,3 +1,5 @@
+require 'json'
+
 #used for pieces that can move linearly without range constraints, ie the queen, rook and bishop
 module LinearMovement
   
@@ -55,5 +57,26 @@ module LinearMovement
       end
     end
     poss_moves
+  end
+end
+
+#to_serialize_objects
+module BasicSerializable
+
+  @@serializer = JSON 
+
+  def serialize 
+    obj = {}
+    instance_variables.map do |var|
+      obj[var] = instance_variable_get(var)
+    end
+    @@serializer.dump obj
+  end
+
+  def unserialize(string)
+    obj = @@serializer.parse(string)
+    obj.keys.each do |key|
+      instance_variable_set(key, obj[key])
+    end
   end
 end
