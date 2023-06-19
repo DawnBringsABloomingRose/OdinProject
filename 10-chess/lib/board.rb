@@ -1,11 +1,13 @@
 require_relative 'pieces'
 
 class Board
-  attr_reader :black_pieces, :white_pieces
+  attr_reader :black_pieces, :white_pieces, :black_deleted, :white_deleted
   def initialize
     @black_pieces = []
     @white_pieces = []
     @log_of_moves = []
+    @black_deleted = []
+    @white_deleted = []
 
     #create pieces
     @black_pieces.push(King.new('black',[4,0]))
@@ -120,7 +122,11 @@ class Board
     return 'check' if is_check?(to_play, piece, to)
     return 'invalid' unless piece.valid_move?(to, current_player, enemy_player)
     piece.make_move(to, current_player, enemy_player)
+    piece_to_delete = enemy_player.find {|i| i.current_location == to}
     
+    @black_deleted.push(@black_pieces.delete(piece_to_delete)) if to_play == 'white' && piece_to_delete
+    @white_deleted.push(@white_pieces.delete(piece_to_delete)) if to_play == 'black' && piece_to_delete
+
     return 'good'
 
   end
@@ -150,9 +156,3 @@ class Board
 end
 
 board = Board.new
-
-
-board.print_board
-
-p board.make_move([0,6], [0, 4], 'white')
-board.print_board
