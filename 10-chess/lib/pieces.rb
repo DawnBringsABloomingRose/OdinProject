@@ -113,6 +113,14 @@ class Pawn < Piece
     @en_passable = false
   end
 
+  def made_passable
+    @en_passable = true
+  end
+
+  def make_unpassable
+    @en_passable = false
+  end
+
   def get_symbol
     return "♙" if @colour == 'black'
     "♟︎"
@@ -160,7 +168,7 @@ class Pawn < Piece
           return true if enemy.is_a?(Piece) && enemy.current_location == move
           
           #en_passant
-          return true if enemy.is_a?(Array) && enemy == [move[0], move[1] - allowed_direction]
+          #return true if enemy.is_a?(Array) && enemy == [move[0], move[1] - allowed_direction]
           return true if enemy.is_a?(Piece) && enemy.current_location == [move[0], move[1] - allowed_direction] && enemy.is_a?(Pawn) && enemy.en_passable
         end
       end

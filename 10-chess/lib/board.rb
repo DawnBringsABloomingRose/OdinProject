@@ -65,19 +65,35 @@ class Board
     return unless ally_pieces[0].is_a?(King)
     king_location = ally_pieces[0].current_location
 
+    if piece
+      ally_locations = []
+      ally_pieces.each do |i|
+        ally_locations.push(move) if i == piece
+        ally_locations.push(i.current_location) unless i == piece
+      end
+      ally_pieces = ally_locations
+    end
+    king_location = move if piece.is_a?(King)
+
     enemy_pieces.each do |piece_to_check|
       return true if piece_to_check.valid_move?(king_location, enemy_pieces, ally_pieces)
     end
     return false
   end
 
-  def is_check?(king_colour)
-    return check?(@black_pieces, @white_pieces) if king_colour == 'black'
-    return check?(@white_pieces, @black_pieces) if king_colour == 'white'
+  def is_check?(king_colour, piece_to_move = nil, move = nil)
+    return check?(@black_pieces, @white_pieces, piece_to_move, move) if king_colour == 'black'
+    return check?(@white_pieces, @black_pieces, piece_to_move, move) if king_colour == 'white'
   end
 
   def test_case_1
     @black_pieces[0].current_location = [4,5]
+  end
+
+  def test_case_2
+    @black_pieces[0].current_location = [4,4]
+    
+    return is_check?('black', @black_pieces[0], [4,5])
   end
 end
 

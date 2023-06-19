@@ -124,7 +124,9 @@ describe Piece do
 
     it "can succesfully en-passant" do
       pawn = Pawn.new('black', [0,1])
-      expect(pawn.valid_move?([1,2], [], [[1 , 1]])).to eql(true)
+      pawn2 = Pawn.new('white', [1, 1])
+      pawn2.made_passable
+      expect(pawn.valid_move?([1,2], [], [pawn2])).to eql(true)
     end
 
     it "fail black for going the wrong way" do
