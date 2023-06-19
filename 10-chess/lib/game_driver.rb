@@ -39,16 +39,5 @@ class Game_Driver
       file.puts @game.serialize
     end
   end
-
-  def test_case_1
-    @game.print_board
-  end
+  
 end
-
-game = Game_Driver.new
-game.new_game
-game.test_case_1
-game.save_game
-game.load_game
-
-game.test_case_1

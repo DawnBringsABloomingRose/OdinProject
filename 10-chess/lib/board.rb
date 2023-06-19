@@ -48,7 +48,7 @@ class Board
 
   def unserialize(string)
     string = string.to_s if string.is_a? Hash
-    obj = @@serializer.parse(string) if string.is_a? String
+    obj = @@serializer.parse(string)
     obj.keys.each do |key|
       valu = obj[key].map do |i|
         hash_piece = @@serializer.parse(i)
