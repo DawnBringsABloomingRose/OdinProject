@@ -73,10 +73,15 @@ class Board
       end
       ally_pieces = ally_locations
     end
+    enemy_locations = []
+    enemy_pieces.each do |i|
+      enemy_locations.push(i.current_location) unless i.current_location == move
+    end
+
     king_location = move if piece.is_a?(King)
 
     enemy_pieces.each do |piece_to_check|
-      return true if piece_to_check.valid_move?(king_location, enemy_pieces, ally_pieces)
+      return true if piece_to_check.valid_move?(king_location, enemy_locations, ally_pieces)
     end
     return false
   end
@@ -84,6 +89,24 @@ class Board
   def is_check?(king_colour, piece_to_move = nil, move = nil)
     return check?(@black_pieces, @white_pieces, piece_to_move, move) if king_colour == 'black'
     return check?(@white_pieces, @black_pieces, piece_to_move, move) if king_colour == 'white'
+  end
+
+  def checkmate?(king_colour)
+    if king_colour == 'black'
+      ally_pieces = @black_pieces
+      enemy_pieces = @white_pieces
+    else
+      ally_pieces = @white_pieces
+      enemy_pieces = @black_pieces
+    end
+
+    ally_pieces.each do |piece|
+      poss_moves = piece.possible_moves(ally_pieces, enemy_pieces)
+      poss_moves.each do |move|
+        return false unless check?(ally_pieces, enemy_pieces, piece, move)
+      end
+    end
+    return true
   end
 
   def test_case_1
@@ -94,6 +117,19 @@ class Board
     @black_pieces[0].current_location = [4,4]
     
     return is_check?('black', @black_pieces[0], [4,5])
+  end
+
+  def test_case_3
+    @black_pieces = []
+    @white_pieces = []
+    king = King.new('black', [0,0])
+    queen1 = Queen.new('white', [1,1])
+    queen2 = Queen.new('white', [3, 3])
+    pawn = Pawn.new('black', [6, 6])
+
+    @black_pieces.push(king).push(pawn)
+    @white_pieces.push(queen1).push(queen2)
+    return checkmate?('black')
   end
 end
 

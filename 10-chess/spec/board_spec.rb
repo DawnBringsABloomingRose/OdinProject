@@ -18,4 +18,16 @@ describe Board do
             expect(board.is_check?('black')).to eql(false)
         end
     end
+
+    describe "#checkmate?" do
+        it "returns false at the start of the game" do
+            board = Board.new
+            expect(board.checkmate?('black')).to eql(false)
+        end
+
+        it "returns true if the king is in checkmate" do
+            board = Board.new
+            expect(board.test_case_3).to eql(true)
+        end
+    end
 end
