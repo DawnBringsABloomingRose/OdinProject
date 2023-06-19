@@ -67,6 +67,7 @@ module BasicSerializable
 
   def serialize 
     obj = {}
+    obj[:class] = self.class.name
     instance_variables.map do |var|
       obj[var] = instance_variable_get(var)
     end
@@ -76,7 +77,7 @@ module BasicSerializable
   def unserialize(string)
     obj = @@serializer.parse(string)
     obj.keys.each do |key|
-      instance_variable_set(key, obj[key])
+      instance_variable_set(key, obj[key]) unless key == 'class'
     end
   end
 end

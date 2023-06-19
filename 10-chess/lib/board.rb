@@ -40,17 +40,23 @@ class Board
 
   def serialize 
     obj = {}
-    final_obj = {}
     instance_variables.map do |var|
-      obj[var] = instance_variable_get(var)
+      obj[var] = instance_variable_get(var).map {|i| i.serialize}
     end
     @@serializer.dump obj
   end
 
   def unserialize(string)
-    obj = @@serializer.parse(string)
+    string = string.to_s if string.is_a? Hash
+    obj = @@serializer.parse(string) if string.is_a? String
     obj.keys.each do |key|
-      instance_variable_set(key, obj[key])
+      valu = obj[key].map do |i|
+        hash_piece = @@serializer.parse(i)
+        piece = Object.const_get(hash_piece["class"]).new('black', [0,0])
+        piece.unserialize(i)
+        piece
+      end
+      instance_variable_set(key, valu)
     end
   end
 
@@ -170,3 +176,8 @@ class Board
     return checkmate?('black')
   end
 end
+
+#board = Board.new()
+#ser = board.serialize
+#board.unserialize(ser)
+#board.print_board
