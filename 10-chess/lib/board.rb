@@ -1,11 +1,11 @@
 require_relative 'pieces'
 
 class Board
+  include BasicSerializable
   attr_reader :black_pieces, :white_pieces, :black_deleted, :white_deleted
   def initialize
     @black_pieces = []
     @white_pieces = []
-    @log_of_moves = []
     @black_deleted = []
     @white_deleted = []
 
@@ -36,6 +36,22 @@ class Board
     end
 
     
+  end
+
+  def serialize 
+    obj = {}
+    final_obj = {}
+    instance_variables.map do |var|
+      obj[var] = instance_variable_get(var)
+    end
+    @@serializer.dump obj
+  end
+
+  def unserialize(string)
+    obj = @@serializer.parse(string)
+    obj.keys.each do |key|
+      instance_variable_set(key, obj[key])
+    end
   end
 
   def print_board
@@ -154,5 +170,3 @@ class Board
     return checkmate?('black')
   end
 end
-
-board = Board.new

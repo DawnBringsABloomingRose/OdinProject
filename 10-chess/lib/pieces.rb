@@ -1,6 +1,7 @@
 require_relative "modules"
 
 class Piece
+  include BasicSerializable
   attr_reader :symbol, :current_location
   attr_accessor :current_location
   MOVES = []
@@ -179,7 +180,7 @@ class Pawn < Piece
     allowed_direction = 1 if @colour == 'black'
     allowed_direction = -1 if @colour == 'white'
 
-    p difference
+    
     if difference[0] == 0
       if difference[1] == 2 * allowed_direction
         ally_locations.each do |ally|
