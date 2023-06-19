@@ -2,6 +2,7 @@ require_relative "modules"
 
 class Piece
   attr_reader :symbol, :current_location
+  attr_accessor :current_location
   MOVES = []
 
   #location: column then row, ex. a1 = [0,0]

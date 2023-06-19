@@ -8,6 +8,11 @@ class Board
     @log_of_moves = []
 
     #create pieces
+    @black_pieces.push(King.new('black',[4,0]))
+    @black_pieces.push(Queen.new('black',[3,0]))
+    @white_pieces.push(King.new('white',[4,7]))
+    @white_pieces.push(Queen.new('white',[3,7]))
+
     8.times do |i|
       @black_pieces.push(Pawn.new('black', [i,1]))
       @white_pieces.push(Pawn.new('white', [i,6]))
@@ -28,10 +33,7 @@ class Board
       @white_pieces.push(Bishop.new('white', [i,7]))
     end
 
-    @black_pieces.push(King.new('black',[4,0]))
-    @black_pieces.push(Queen.new('black',[3,0]))
-    @white_pieces.push(King.new('white',[4,7]))
-    @white_pieces.push(Queen.new('white',[3,7]))
+    
   end
 
   def print_board
@@ -59,10 +61,29 @@ class Board
 
   end
 
-  def self_check?
+  def check?(ally_pieces, enemy_pieces, piece = nil, move = nil)
+    return unless ally_pieces[0].is_a?(King)
+    king_location = ally_pieces[0].current_location
+
+    enemy_pieces.each do |piece_to_check|
+      return true if piece_to_check.valid_move?(king_location, enemy_pieces, ally_pieces)
+    end
+    return false
+  end
+
+  def is_check?(king_colour)
+    return check?(@black_pieces, @white_pieces) if king_colour == 'black'
+    return check?(@white_pieces, @black_pieces) if king_colour == 'white'
+  end
+
+  def test_case_1
+    @black_pieces[0].current_location = [4,5]
   end
 end
 
 board = Board.new
 
-board.print_board
+
+
+
+p board.is_check?('black')
