@@ -58,6 +58,9 @@ class Board
     puts alp_line
 
   end
+
+  def self_check?
+  end
 end
 
 board = Board.new
