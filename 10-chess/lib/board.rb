@@ -100,6 +100,3 @@ end
 board = Board.new
 
 
-
-
-p board.is_check?('black')

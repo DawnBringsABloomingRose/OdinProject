@@ -18,11 +18,10 @@ class Piece
 
     difference = [move[0] - @current_location[0], move[1] - @current_location[1]]
     
-    #add check to make sure move wont put into check
+    #possible_direction checks to make sure the direction is valid
+    #clear_to_move checks if there are other pieces in the way that would hinder the move
     return self.possible_direction?(difference) && self.clear_to_move?(move, ally_locations, enemy_locations)
   end
-
-  
 end
 
 class Knight < Piece
@@ -44,6 +43,16 @@ class Knight < Piece
       return false if ally.is_a?(Piece) && ally.current_location == move
     end
     clear
+  end
+
+  def possible_moves(ally_locations, enemy_locations)
+    poss_moves = []
+    MOVES.each do |move|
+      x_direction = move[0] + @current_location[0]
+      y_direction = move[1] + @current_location[1]
+      poss_moves.push([x_direction, y_direction]) if self.valid_move?([x_direction, y_direction], ally_locations, enemy_locations)
+    end
+    poss_moves
   end
 end
 
@@ -69,12 +78,23 @@ class King < Piece
     end
     clear
   end
+
+  def possible_moves(ally_locations, enemy_locations)
+    poss_moves = []
+    MOVES.each do |move|
+      x_direction = move[0] + @current_location[0]
+      y_direction = move[1] + @current_location[1]
+      poss_moves.push([x_direction, y_direction]) if self.valid_move?([x_direction, y_direction], ally_locations, enemy_locations)
+    end
+    poss_moves
+  end
 end
 
 class Queen < Piece
   include LinearMovement
 
   MOVES = [[0,1], [1,1], [1,0], [0,-1], [-1,1], [1,-1], [-1,-1], [-1,0]]
+  
 
   def get_symbol
     return "♕" if @colour == 'black'
@@ -85,7 +105,10 @@ class Queen < Piece
     direction = normalize_direction(direction)
     MOVES.include?(direction)
   end
-
+  
+  def give_moves
+    MOVES
+  end
   
 end
 
@@ -102,6 +125,10 @@ class Bishop < Piece
   def possible_direction?(direction)
     direction = normalize_direction(direction)
     MOVES.include?(direction)
+  end
+
+  def give_moves
+    MOVES
   end
 end
 
@@ -124,6 +151,20 @@ class Pawn < Piece
   def get_symbol
     return "♙" if @colour == 'black'
     "♟︎"
+  end
+
+  def possible_moves(ally_locations, enemy_locations)
+    allowed_direction = 1 if @colour == 'black'
+    allowed_direction = -1 if @colour == 'white'
+    moves = [[0,1*allowed_direction], [0, 2*allowed_direction], [1, 1 * allowed_direction], [-1, 1 * allowed_direction]]
+    poss_moves = []
+
+    moves.each do |i|
+      x_direction = i[0] + @current_location[0]
+      y_direction = i[1] + @current_location[1]
+      poss_moves.push([x_direction, y_direction]) if self.valid_move?([x_direction, y_direction], ally_locations, enemy_locations)
+    end
+    poss_moves
   end
 
   def valid_move?(move, ally_locations = [], enemy_locations = [])
@@ -172,6 +213,7 @@ class Pawn < Piece
           return true if enemy.is_a?(Piece) && enemy.current_location == [move[0], move[1] - allowed_direction] && enemy.is_a?(Pawn) && enemy.en_passable
         end
       end
+      return false
     end
   end
 end
@@ -189,5 +231,9 @@ class Rook < Piece
   def possible_direction?(direction)
     direction = normalize_direction(direction)
     MOVES.include?(direction)
+  end
+
+  def give_moves
+    MOVES
   end
 end

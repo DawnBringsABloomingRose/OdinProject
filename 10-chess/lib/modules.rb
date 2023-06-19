@@ -18,6 +18,7 @@ module LinearMovement
 
 
     submoves = []
+    submoves.push(move)
     x = current_location[0] + direction[0]
     y = current_location[1] + direction[1]
     while x != move[0] && y != move[1] do
@@ -41,5 +42,18 @@ module LinearMovement
       return clear unless clear
     end
     clear
+  end
+
+  def possible_moves(ally_locations, enemy_locations)
+    poss_moves = []
+    
+    self.give_moves.each do |move|
+      8.times do |i|
+        x_direction = move[0] * (i+1) + @current_location[0]
+        y_direction = move[1] * (i+1) + @current_location[1]
+        poss_moves.push([x_direction, y_direction]) if self.valid_move?([x_direction, y_direction], ally_locations, enemy_locations)
+      end
+    end
+    poss_moves
   end
 end

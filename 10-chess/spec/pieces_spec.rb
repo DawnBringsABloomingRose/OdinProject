@@ -144,4 +144,26 @@ describe Piece do
       expect(pawn.valid_move?([3,2])).to eql(true)
     end
   end
+  
+  describe "#possible_moves" do
+    it "returns possible moves for a knight" do
+      knight = Knight.new('black', [3,3])
+      expect(knight.possible_moves([], [])).to eql([[4, 5], [5, 4], [4, 1], [5, 2], [2, 5], [1, 4], [2, 1], [1, 2]])
+    end
+
+    it "returns possible moves for a bishop locked in the corner" do
+      bishop = Bishop.new('black', [0,0])
+      expect(bishop.possible_moves([[1,1]], [])).to eql([])
+    end
+
+    it "returns possible moves for a bishop locked in the corner by 1 enemy" do
+      bishop = Bishop.new('black', [0,0])
+      expect(bishop.possible_moves([], [[1,1]])).to eql([[1,1]])
+    end
+
+    it "returns possible moves for a pawn on its first move" do
+      pawn = Pawn.new('black', [1,1])
+      expect(pawn.possible_moves([],[])).to eql([[1,2], [1,3]])
+    end
+  end
 end
