@@ -3,7 +3,33 @@ require_relative "game"
 class Game_Driver
   def initialize 
     puts "Welcome to chess!\n"
-    @game = nil
+    @game = Game.new
+    puts "Type new or N to play a new game or type L or load to load one"
+    response = gets.chomp.downcase
+    new_game if response[0] == 'n'
+    load_game if response[0] == 'l'
+
+    @game.print_board
+    run_game
+  end
+
+  def run_game
+    puts "it is #{@game.to_play}'s turn! Enter the location of the piece you wish to move and where you would like to move it to"
+    puts 'ie "A3 B2"'
+    move = gets.chomp
+    response = @game.move(move)
+    if response == 'mate'
+      puts "Checkmate! #{@game.switch_side} wins!"
+    elsif response == 'check'
+      system("clear") || system("cls")
+      @game.print_board
+      puts "#{@game.to_play} is in check!"
+      return run_game
+    elsif response == 'ok'
+      system("clear") || system("cls")
+      @game.print_board
+      return run_game
+    end
   end
 
   def new_game
@@ -39,5 +65,7 @@ class Game_Driver
       file.puts @game.serialize
     end
   end
-  
+
 end
+
+game = Game_Driver.new
