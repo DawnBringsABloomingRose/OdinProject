@@ -68,7 +68,9 @@ class Game
     def try_again
         puts "Enter the location of the piece you wish to move and where you would like to move it to"
         puts 'ie "A3 B2"'
-        input = gets.chomp
+        puts "Or enter 'menu' to go to the main menu"
+        input = gets.chomp.downcase
+        return 'menu' if input == 'menu'
         move(input)
     end
     

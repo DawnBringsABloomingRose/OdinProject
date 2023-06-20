@@ -14,22 +14,40 @@ class Game_Driver
   end
 
   def run_game
+    @game.print_board
     puts "it is #{@game.to_play}'s turn! Enter the location of the piece you wish to move and where you would like to move it to"
     puts 'ie "A3 B2"'
+    puts "or type 'menu' to go to the main menu"
     move = gets.chomp
+    return main_menu if move.downcase == 'menu'
     response = @game.move(move)
+    return main_menu if response == 'menu'
     if response == 'mate'
       puts "Checkmate! #{@game.switch_side} wins!"
     elsif response == 'check'
       system("clear") || system("cls")
-      @game.print_board
       puts "#{@game.to_play} is in check!"
       return run_game
     elsif response == 'ok'
       system("clear") || system("cls")
-      @game.print_board
       return run_game
     end
+  end
+
+  def main_menu
+    puts "Main menu!"
+    puts "Type Continue to go back, Save to save your game, Load to load a new game or Exit to exit"
+    input = gets.chomp.downcase
+    if input[0] == 'c'
+      return run_game
+    elsif input[0] == 's'
+      save_game
+    elsif input[0] == 'l'
+      load_game
+    elsif input[0] == 'e'
+      return
+    end
+    main_menu
   end
 
   def new_game
