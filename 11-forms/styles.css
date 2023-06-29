@@ -1,0 +1,36 @@
+* {
+  margin: 0px
+}
+.whole {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  min-width: 100vw;
+  align-items: stretch;
+}
+
+.right-side {
+  flex: 1 1 70%;
+  min-width: 70vw;
+  background-color: #e6e6e6;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.left-side {
+  flex: 1 1 30%;
+  min-width: 30vw;
+  background-image: url("./imgs/background-img.jpg");
+  background-color: #cccccc;
+  background-size: cover;
+  justify-content: center;
+}
+
+.form {
+  background-color: white;
+}
+
+.right-side div {
+  min-height: 30vh;
+}
