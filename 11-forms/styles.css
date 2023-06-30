@@ -20,17 +20,17 @@
 }
 
 .right-side {
-  flex: 1 1 70%;
-  min-width: 70vw;
+  flex: 1 1 65%;
+  min-width: 65vw;
   background-color: #e6e6e6;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: column;
 }
 
 .left-side {
-  flex: 1 1 30%;
-  min-width: 30vw;
+  flex: 1 1 35%;
+  min-width: 35vw;
   background-image: url("./imgs/background-img.jpg");
   background-color: #cccccc;
   display: flex;
@@ -40,14 +40,18 @@
   align-items: stretch;
 }
 
-.form {
-  background-color: white;
+
+.form p {
+  margin: 20px 10%;
+  font-size: 1.5rem;
+  color: rgb(48, 48, 48);
 }
 
 .right-side div.form {
   min-height: 30vh;
   -webkit-box-shadow: 0px 3px 10px 3px rgba(0,0,0,0.60); 
   box-shadow: 0px 3px 10px 3px rgba(0,0,0,0.60);
+  background-color: white;
 }
 
 .logo {
@@ -66,7 +70,7 @@
 }
 .sell p {
   margin: 20px;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .sell {
@@ -91,20 +95,16 @@ img {
   font-size: 0.9rem;
 }
 
-.form {
-  display: flex;
-  align-items: center;
-}
 
 .col {
-  margin:40px;
+  margin:0 20px; 
   width: 50%;
 }
 
 li {
   display: flex;
   flex-direction: column;
-  margin: 10px auto;
+  margin: 10px 20px;
 }
 
 ul {
@@ -113,8 +113,63 @@ ul {
   flex-direction: column;
   justify-content: space;
   align-items: stretch;
+  padding: 0;
 }
 
 form {
   width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 15px 7%;
+}
+
+.create-account {
+  min-height: 20%;
+}
+
+#submit-button {
+  position: relative;
+  top: 19vh;
+  right: 35vw;
+  padding: 0.8rem 1.9rem;
+  font-size: 1.2rem;
+  color: white;
+  border: 0;
+  background-color: #596d48;
+  border-radius: 10px;
+}
+
+p {
+  font-weight: bold;
+}
+
+input {
+  border: 2px solid #e5e7eb;
+  border-radius: 4px;
+  font-size: 1.2rem;
+}
+
+input:focus {
+  border: 2px solid #5985ff;
+  outline: none;
+  -webkit-box-shadow: 5px 5px 8px 1px rgba(0,0,0,0.15); 
+  box-shadow: 5px 5px 8px 1px rgba(0,0,0,0.15);
+}
+
+input:invalid {
+  border: 2px solid #ee3b3b;
+  outline: none;
+}
+
+.login {
+  color: #596d48;
+  font-weight: bold;
+}
+
+.create-account p {
+  font-weight: 400;
+  position: relative;
+  top: 30px;
+  left: 30px;
 }
