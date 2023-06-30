@@ -90,3 +90,31 @@ img {
   color: white;
   font-size: 0.9rem;
 }
+
+.form {
+  display: flex;
+  align-items: center;
+}
+
+.col {
+  margin:40px;
+  width: 50%;
+}
+
+li {
+  display: flex;
+  flex-direction: column;
+  margin: 10px auto;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space;
+  align-items: stretch;
+}
+
+form {
+  width: 70%;
+}
