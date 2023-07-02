@@ -237,3 +237,18 @@ table { border-collapse: collapse; border-spacing: 0;}
   display: grid;
   grid-template: 1fr 1fr 1fr 1fr / 1fr ;
 }
+
+.sm-ico {
+  height: 27px;
+  margin: 0px 10px;
+}
+
+.project-buttons {
+  justify-self: end;
+  align-self: center;
+}
+
+.project-desc {
+  align-self: center;
+  margin: 10px
+}
