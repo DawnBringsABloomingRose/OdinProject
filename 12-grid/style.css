@@ -31,7 +31,7 @@ table { border-collapse: collapse; border-spacing: 0;}
   grid-area: 2 / 2 / 3 / 3;
   display: grid; 
   grid-template-columns: 3fr 1fr;
-  grid-template-rows: 5fr 5fr 1fr;
+  grid-template-rows: 8fr 8fr 1fr;
   
 }
 
@@ -164,6 +164,7 @@ table { border-collapse: collapse; border-spacing: 0;}
   flex-direction: column;
   justify-content: flex-end;
   padding: 10px;
+  overflow: auto;
 }
 
 .trending {
@@ -186,4 +187,23 @@ table { border-collapse: collapse; border-spacing: 0;}
 .trending-box {
   background-color: pink;
   height: 80%;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.content {
+  font-size: 0.8rem;
+}
+
+.announcement {
+  margin: 10px;
+  border-top: 1px solid rgb(175, 175, 175);
+}
+.announcement p {
+  margin: 5px 0px;
+}
+#first {
+  border-top: 0px;
 }
