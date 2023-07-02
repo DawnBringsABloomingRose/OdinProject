@@ -16,6 +16,10 @@ table { border-collapse: collapse; border-spacing: 0;}
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 1fr 1fr;
+  -webkit-box-shadow: 1px 3px 7px 0px rgba(100,100,100,0.57);
+  box-shadow: 1px 3px 7px 0px rgba(100,100,100,0.57);
+  position: relative;
+  padding-bottom:30px;
 }
 
 .sidebar {
@@ -27,7 +31,7 @@ table { border-collapse: collapse; border-spacing: 0;}
 }
 
 .main-content {
-  background-color: grey;
+  background-color: rgb(233, 233, 233);
   grid-area: 2 / 2 / 3 / 3;
   display: grid; 
   grid-template-columns: 3fr 1fr;
@@ -52,17 +56,23 @@ table { border-collapse: collapse; border-spacing: 0;}
   align-items: center;
   justify-content: center;
   display: flex;
+
 }
 
 .search input {
   width: 75%;
+  border-radius: 13px;
+  background-color: rgb(230, 230, 230);
+  border: 0;
+  height: 25px;
+  margin: 0 5px;
 }
 .search img {
   height: 25px;
 }
 
-.user {
-  justify-self: stretch;
+.user-buttons {
+  justify-self: center;
   align-self: center;
 
   display: flex;
@@ -82,7 +92,7 @@ table { border-collapse: collapse; border-spacing: 0;}
   margin: 0 12px;
 }
 
-.user p {
+.user-buttons p {
   font-weight: bold;
   margin: 0 12px;
 }
@@ -121,12 +131,27 @@ table { border-collapse: collapse; border-spacing: 0;}
 
 .buttons button {
   margin: 0 12px;
+  border: 0px;
+  background-color: rgb(52, 127, 214);
+  color: white;
+  border-radius: 13px;
+  padding: 8px 20px;
+  font-weight: bold;
+
 }
 
 
 /*sidebar*/
 
 .sidebar {
+  padding: 10px 20px;
+  background-color: rgb(59, 150, 255);
+}
+
+.sidebar p {
+  font-size: 1.5rem;
+  color: white;
+  font-weight: bold;
 }
 
 .branding {
@@ -139,9 +164,11 @@ table { border-collapse: collapse; border-spacing: 0;}
 
 .nav1>div, .nav2>div {
   display: flex;
+  margin: 10px 0;
 }
 .sidebar img {
   height: 20px;
+  margin: 0 10px;
 }
 
 /*main content*/ 
@@ -155,6 +182,9 @@ table { border-collapse: collapse; border-spacing: 0;}
   padding: 10px;
 }
 
+.main-content div {
+  border-radius: 2%;
+}
 .projects p {
   grid-area: 1 / 1 / 2 / 3;
 }
@@ -164,7 +194,6 @@ table { border-collapse: collapse; border-spacing: 0;}
   flex-direction: column;
   justify-content: flex-end;
   padding: 10px;
-  overflow: auto;
 }
 
 .trending {
@@ -176,19 +205,24 @@ table { border-collapse: collapse; border-spacing: 0;}
 }
 
 .project {
-  background-color: aqua;
+  background-color: white;
   display:grid;
   grid-template: 2fr 1fr / 1fr;
   border-left: 5px solid orange;
 }
 
 .announcement-box {
-  background-color: pink;
+  background-color: white;
   height: 80%;
+  
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  overflow: auto;
 }
 
 .trending-box {
-  background-color: pink;
+  background-color: white;
   height: 80%;
 }
 
@@ -201,8 +235,10 @@ table { border-collapse: collapse; border-spacing: 0;}
 }
 
 .announcement {
-  margin: 10px;
-  border-top: 1px solid rgb(175, 175, 175);
+  margin: 12px;
+  font-size: 0.9rem;
+  border-top: 1px solid rgb(212, 212, 212);
+  align-self: center;
 }
 .announcement p {
   margin: 5px 0px;
@@ -250,5 +286,28 @@ table { border-collapse: collapse; border-spacing: 0;}
 
 .project-desc {
   align-self: center;
-  margin: 10px
+  margin: 10px 20px;
+}
+
+.project-desc p {
+  margin: 4px 0;
+}
+
+.projects>p {
+  align-self: end;
+  margin: 5px 0px;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.announcements>p {
+  margin: 5px 0px;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.trending>p {
+  margin: 5px 0px;
+  font-weight: bold;
+  font-size: 1.3rem;
 }
