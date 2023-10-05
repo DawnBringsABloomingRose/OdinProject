@@ -1,0 +1,6 @@
+.game {
+    display: grid;
+    width: 30%;
+    height:30vw;
+    grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
+}
