@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="main.js" defer></script>
+</head>
+<body>
+    <div class="header">
+        <button class="view-all">View Projects</button>
+        <button class="view-todos">View all To Do Items</button>
+        <button class="new-project">New Project</button>
+    </div>
+    <div class="main"></div>
+
+    <dialog id="newToDoDialog">
+        <form id="newToDo">
+          <p>
+            <label for="title">
+              Title
+            </label>
+            <input type="text" name="title" id="titleinput">
+            <label for="description">Description</label><input type="text" name="description" id="descinput">
+            <label for="duedate">Due date:</label><input type="date" name="duedate" id="dueinput">
+            <label for="priority">Priority, 1-10</label><input type="number" name="priority" id="priorityinput">
+            <label for="notes">Notes:</label><input type="text" name="notes" id="noteinput">
+          </p>
+          <div>
+            <button value="cancel" formmethod="dialog">Cancel</button>
+            <button id="confirmBtn" value="default" type="submit">Confirm</button>
+          </div>
+        </form>
+      </dialog>
+</body>
+</html>
